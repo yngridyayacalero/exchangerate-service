@@ -11,6 +11,7 @@ import io.github.resilience4j.retry.annotation.Retry;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class ExchangeRateUseCase {
 
     @CircuitBreaker(name = "exchangeRateService", fallbackMethod = "fallbackRate")
     @Retry(name = "exchangeRateService")
+    @Cacheable(value = "exchangeRates", key = "#operation.originCurrency + '-' + #operation.fateCurrency + '-' + #operation.amount")
     //@Transactional si se quiere implementar con base de datos y guardar las operaciones, tambien se debe añadir la dependencia
     public Single<Double> getRate(ExchangeRateOperation operation) {
         return Flowable.fromIterable(strategies)
