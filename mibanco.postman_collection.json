@@ -1,0 +1,62 @@
+{
+	"info": {
+		"_postman_id": "16e8e955-870b-4c3b-8484-4d1171aaf514",
+		"name": "mibanco",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "45730908",
+		"_collection_link": "https://yngrid-9022178.postman.co/workspace/yngrid's-Workspace~f31cf14f-7832-4b16-8242-28961d8014d5/collection/45730908-16e8e955-870b-4c3b-8484-4d1171aaf514?action=share&source=collection_link&creator=45730908"
+	},
+	"item": [
+		{
+			"name": "success - exchange-rate",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 123456",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"amount\": 100,\r\n  \"originCurrency\": \"USD\",\r\n  \"fateCurrency\": \"PEN\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/exchange-rate"
+			},
+			"response": []
+		},
+		{
+			"name": "error - exchange-rate",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 123456",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"amount\": 100,\r\n  \"originCurrency\": \"CLJ\",\r\n  \"fateCurrency\": \"PEN\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/exchange-rate"
+			},
+			"response": []
+		}
+	]
+}
